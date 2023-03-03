@@ -1,35 +1,59 @@
-﻿using System;
-using System.Globalization;
-internal class Program
+﻿double num1, num2;
+int opcao = 0;
+
+void Menu()
 {
-    private static void Main(string[] args)
+    Console.Clear();
+    Console.WriteLine("1 - Somar");
+    Console.WriteLine("2 - Subtrair");
+    Console.WriteLine("3 - Multiplicar");
+    Console.WriteLine("4 - Dividir");
+    Console.WriteLine("5 - Sair");
+    Console.WriteLine("Escolha uma opção: ");
+    opcao = int.Parse(Console.ReadLine());
+
+    switch(opcao)
     {
-        double numero_1 = 0.0, numero_2 = 0.0;
-        double divisao = 0.0;
+        default:
+            Console.WriteLine("Opção Inválida !");
+            Console.ReadLine();
+        break;
 
-        Console.WriteLine("Digite o primeiro número");
-        numero_1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+        case 1:
+            Console.WriteLine("A soma dos números é: " + (num1 + num2));
+            Console.ReadLine();
+        break;
 
-        Console.WriteLine("Digite o segundo número");
-        numero_2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+        case 2:
+            Console.WriteLine("A subtração é : " +(num1 - num2));
+            Console.ReadLine();
+        break;
 
-        Console.WriteLine("A SOMA ENTRE O " + numero_1 + " E " + numero_2 + " = " + (numero_1 + numero_2));
+        case 3:
+            Console.WriteLine("A Multiplicação  é : " + (num1 * num2));
+            Console.ReadLine();
+        break;
 
-        Console.WriteLine("SUBTRAÇÕES");
-        Console.WriteLine("A SUBTRAÇÃO ENTRE O " + numero_1 + " E " + numero_2 + " = " + (numero_1 - numero_2));
-        Console.WriteLine("A SUBTRAÇÃO ENTRE O " + numero_2 + " E " + numero_1 + " = " + (numero_2 - numero_1));
+        case 4:
+            Console.WriteLine("A divisão é :" + (num1 / num2));
+            Console.ReadLine();
+        break;
 
-        Console.WriteLine("A MULTIPLICAÇÃO ENTRE O " + numero_1 + " E " + numero_2 + " = " + (numero_1 * numero_2));
-
-        if (numero_2 != 0.0)
-        {
-            divisao = numero_1 / numero_2;
-            Console.WriteLine("A DIVISÃO ENTE O " + numero_1 + " E " + numero_2 + " = " + divisao.ToString("F2", CultureInfo.InvariantCulture));
-        }
-        else
-        {
-            Console.WriteLine("NÃO É POSSÍVEL DIVIDIR POR ZERO");
-        }
-
+        case 5:
+            Console.WriteLine("Até logo !");
+            Console.ReadLine();
+        break;
     }
+}
+
+
+Console.WriteLine("Informe o primeiro número");
+num1 = int.Parse(Console.ReadLine());
+
+Console.WriteLine("Informe o segundo número");
+num2 = int.Parse(Console.ReadLine());   
+
+while(opcao != 5)
+{
+    Menu();
 }
