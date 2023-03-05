@@ -3,103 +3,152 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        int opcao = 0;
-        int numero1 = 0, numero2 = 0;
+        double numero1 = 0.0, numero2 = 0.0, resultado = 0.0;
+        int opcao, ordem = 1;
+        string operacao;
 
-        int Menu()
+        void Menu()
         {
-            Console.WriteLine("1 - Somar dois números");
-            Console.WriteLine("2 - Subtrair dois números");
-            Console.WriteLine("3 - Multiplicar dois números");
-            Console.WriteLine("4 - Dividir dois núemros");
-            Console.WriteLine("5 - sair");
+            Console.WriteLine("1 - SOMAR DOIS NÚMEROS");
+            Console.WriteLine("2 - SUBTRAIR DOIS NÚMEROS");
+            Console.WriteLine("3 - MULTIPLICAR DOIS NÚMEROS");
+            Console.WriteLine("4 - DIVIDIR DOIS NÚMEROS");
+            Console.WriteLine("5 - TROCAR NÚMEROS ENTRE SI");
+            Console.WriteLine("6 - ENTRAR COM NOVOS VALORES");
+            Console.WriteLine("7 - SAIR");
             opcao = int.Parse(Console.ReadLine());
-
-            return opcao;
         }
 
-        void Somar(int numero1, int numero2)
+        void Entrada()
         {
-            Console.WriteLine("A soma entre o " + numero1 + " + " + numero2 + " = " + (numero1 + numero2));
-        }
-        void Subtrair(int numero1, int numero2)
-        {
-            Console.WriteLine("A subtração entre o " + numero1 + " - " + numero2 + " = " + (numero1 - numero2));
-        }
-        void Multiplicacao(int numero1, int numero2)
-        {
-            Console.WriteLine("A multiplicação entre o " + numero1 + " * " + numero2 + " = " + (numero1 * numero2));
-        }
-        void Divisao(int numero1, int numero2)
-        {
-            if (numero2 == 0)
+            if (ordem > 2)
             {
-                Console.WriteLine("Não é possivel dividir por zero");
+                ordem = 1;
+            }
+
+            Console.WriteLine("ENTRE COM " + ordem + " º VALOR");
+            if (ordem == 1)
+            {
+                numero1 = int.Parse(Console.ReadLine());
             }
             else
             {
-                double divisao = (double)numero1 / numero2;
-                Console.WriteLine("A divisão entre o " + numero1 + " / " + numero2 + " = " + divisao.ToString("F2"));
+                numero2 = int.Parse(Console.ReadLine());
             }
+            ordem++;
         }
-        void MensagemAteLogo()
+        void saida()
         {
             Console.WriteLine("Até logo !!!");
         }
-        void OpcaoInvalida()
+        void Erro()
         {
             Console.WriteLine("Opção inválida !!!");
         }
 
-        void escolha(int opcao, int numero1, int numero2)
+        void MostrarTela()
+        {
+            Console.WriteLine(operacao + " entre " + numero1 + " e " + numero2 + " = " + resultado);
+        }
+
+        void Somar()
+        {
+            resultado = numero1 + numero2;
+            operacao = "SOMA";
+            MostrarTela();
+        }
+        void Subtrair()
+        {
+            resultado = numero1 - numero2;
+            operacao = "SUBTRAÇÃO";
+            MostrarTela();
+        }
+        void Multiplicar()
+        {
+            resultado = numero1 * numero2;
+            operacao = "MULTIPLICAÇÃO";
+            MostrarTela();
+        }
+        void dividir()
+        {
+            if (numero2 == 0.0)
+            {
+                Console.WriteLine("NÃO É POSSÍVEL DIVIDIR POR ZERO !!!");
+            }
+            else
+            {
+                resultado = (numero1 / numero2);
+                operacao = "DIVISÃO";
+                MostrarTela();
+            }
+        }
+        void Trocar()
+        {
+            double aux;
+            aux = numero1;
+            numero1 = numero2;
+            numero2 = aux;
+        }
+        void Mudar()
+        {
+            for (int i = 1; i <= 2; i++)
+            {
+                Entrada();
+            }
+        }
+
+        void Escolha()
         {
             switch (opcao)
             {
                 case 1:
-                    Somar(numero1, numero2);
+                    Somar();
                     break;
 
                 case 2:
-                    Subtrair(numero1, numero2);
+                    Subtrair();
                     break;
 
                 case 3:
-                    Multiplicacao(numero1, numero2);
+                    Multiplicar();
                     break;
 
                 case 4:
-                    Divisao(numero1, numero2);
+                    dividir();
                     break;
 
                 case 5:
-                    MensagemAteLogo();
+                    Trocar();
+                    break;
+
+                case 6:
+                    Mudar();
+                    break;
+
+                case 7:
+                    saida();
                     break;
 
                 default:
-                    OpcaoInvalida();
+                    Erro();
                     break;
 
             }
         }
 
-        int PegarNumero(int i)
+        for (int i = 1; i <= 2; i++)
         {
-            int numero;
-            Console.WriteLine("Digite o " + i + "º número: ");
-            numero = int.Parse(Console.ReadLine());
-            return numero;
+            Entrada();
         }
 
-        numero1 = PegarNumero(1);
-        numero2 = PegarNumero(2);
-
-        while (opcao != 5)
+        Console.WriteLine();
+        Menu();
+        Console.WriteLine();
+        while (opcao != 7)
         {
-
-            opcao = Menu();
-            escolha(opcao, numero1, numero2);
-
+            Escolha();
+            Menu();
+            Console.WriteLine();
         }
-
     }
 }
