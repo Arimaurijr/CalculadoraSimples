@@ -1,154 +1,80 @@
-﻿
+﻿using System;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
-        double numero1 = 0.0, numero2 = 0.0, resultado = 0.0;
-        int opcao, ordem = 1;
-        string operacao;
+        double numero1 = 0.0, numero2 = 0.0;
+        int opcao;
 
-        void Menu()
+        int Menu()
         {
-            Console.WriteLine("1 - SOMAR DOIS NÚMEROS");
-            Console.WriteLine("2 - SUBTRAIR DOIS NÚMEROS");
-            Console.WriteLine("3 - MULTIPLICAR DOIS NÚMEROS");
-            Console.WriteLine("4 - DIVIDIR DOIS NÚMEROS");
-            Console.WriteLine("5 - TROCAR NÚMEROS ENTRE SI");
-            Console.WriteLine("6 - ENTRAR COM NOVOS VALORES");
-            Console.WriteLine("7 - SAIR");
-            opcao = int.Parse(Console.ReadLine());
+            Console.WriteLine("1 - SOMAR");
+            Console.WriteLine("2 - SUBTRAIR");
+            Console.WriteLine("3 - MULTIPLICAR");
+            Console.WriteLine("4 - DIVISÃO");
+            Console.WriteLine("5 - SAIR");
+
+            return opcao = int.Parse(Console.ReadLine());
         }
 
-        void Entrada()
+        double Somar()
         {
-            if (ordem > 2)
-            {
-                ordem = 1;
-            }
-
-            Console.WriteLine("ENTRE COM " + ordem + " º VALOR");
-            if (ordem == 1)
-            {
-                numero1 = int.Parse(Console.ReadLine());
-            }
-            else
-            {
-                numero2 = int.Parse(Console.ReadLine());
-            }
-            ordem++;
+            return numero1 + numero2;
         }
-        void saida()
+        double Subtrair()
         {
-            Console.WriteLine("Até logo !!!");
+            return numero1 - numero2;
         }
-        void Erro()
+        double Multiplicacao()
         {
-            Console.WriteLine("Opção inválida !!!");
+            return numero1 * numero2;
+        }
+        double Divisao()
+        {
+            return numero1 / numero2;
         }
 
-        void MostrarTela()
+        while (Menu() != 5)
         {
-            Console.WriteLine(operacao + " entre " + numero1 + " e " + numero2 + " = " + resultado);
-        }
+            Console.WriteLine("DIGITE O NUMERADOR:");
+            numero1 = double.Parse(Console.ReadLine());
 
-        void Somar()
-        {
-            resultado = numero1 + numero2;
-            operacao = "SOMA";
-            MostrarTela();
-        }
-        void Subtrair()
-        {
-            resultado = numero1 - numero2;
-            operacao = "SUBTRAÇÃO";
-            MostrarTela();
-        }
-        void Multiplicar()
-        {
-            resultado = numero1 * numero2;
-            operacao = "MULTIPLICAÇÃO";
-            MostrarTela();
-        }
-        void dividir()
-        {
-            if (numero2 == 0.0)
-            {
-                Console.WriteLine("NÃO É POSSÍVEL DIVIDIR POR ZERO !!!");
-            }
-            else
-            {
-                resultado = (numero1 / numero2);
-                operacao = "DIVISÃO";
-                MostrarTela();
-            }
-        }
-        void Trocar()
-        {
-            double aux;
-            aux = numero1;
-            numero1 = numero2;
-            numero2 = aux;
-        }
-        void Mudar()
-        {
-            for (int i = 1; i <= 2; i++)
-            {
-                Entrada();
-            }
-        }
+            Console.WriteLine("DIGITE O DENOMINADOR: ");
+            numero2 = double.Parse(Console.ReadLine());
 
-        void Escolha()
-        {
             switch (opcao)
             {
                 case 1:
-                    Somar();
+                    Console.WriteLine("A SOMA ENTRE OS NÚMEROS É " + Somar());
                     break;
 
                 case 2:
-                    Subtrair();
+                    Console.WriteLine("A SUBTRAÇÃO ENTRE OS NÚMEROS É " + Subtrair());
                     break;
 
                 case 3:
-                    Multiplicar();
+                    Console.WriteLine("A MULTIPLICAÇÃO ENTRE OS NÚMEROS É " + Multiplicacao());
                     break;
 
                 case 4:
-                    dividir();
-                    break;
-
-                case 5:
-                    Trocar();
-                    break;
-
-                case 6:
-                    Mudar();
-                    break;
-
-                case 7:
-                    saida();
+                    if (numero2 == 0.0)
+                    {
+                        Console.WriteLine("DENOMINADOR IGUAL A ZERO");
+                    }
+                    else
+                    {
+                        Console.WriteLine("A DIVISÃO ENTRE O NÚMEROS É " + numero1 / numero2);
+                    }
                     break;
 
                 default:
-                    Erro();
+                    Console.WriteLine("Opção inválida !");
                     break;
-
             }
         }
 
-        for (int i = 1; i <= 2; i++)
-        {
-            Entrada();
-        }
+        Console.WriteLine("Até logo !");
 
-        Console.WriteLine();
-        Menu();
-        Console.WriteLine();
-        while (opcao != 7)
-        {
-            Escolha();
-            Menu();
-            Console.WriteLine();
-        }
     }
 }
